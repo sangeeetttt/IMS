@@ -12,56 +12,50 @@ def main():
     root.config(bg='white')
     root.focus_force()
 
-    # All vaiables
+    # All variables
+
 
     var_searchby = StringVar()
     var_searchtxt = StringVar()
     var_emp_id = StringVar()
+    var_emp_id.set('')
     var_gender = StringVar()
     var_contact = StringVar()
+    var_contact.set('')
     var_name = StringVar()
+    var_name.set('')
     var_dob = StringVar()
+    var_dob.set('')
     var_doj = StringVar()
+    var_doj.set('')
     var_email = StringVar()
+    var_email.set('')
     var_pass = StringVar()
+    var_pass.set('')
     var_utype = StringVar()
     var_address = StringVar()
+    var_address.set('')
     var_salary = StringVar()
+    var_salary.set('')
+
     def database():
         a = sqlite3.connect('test.db')
         c = a.cursor()
-        try:
-            c.execute("CREATE TABLE addresses(Employee text, Name text, E-mail text,Gender text,Contact text, D.O.B text, D.O.J text, Password text,UserType text,Address text,Salary text)")
-            c.execute('INSERT INTO addresses VALUES (:a,:b,:c,:d,:e,:f,:g,:h,:i,:j,:k,:l)', {
-                'a': var_emp_id.get(),
-                'b':var_name.get(),
-                'd': var_email.get(),
-                'e': var_gender.get(),
-                'f': var_contact.get(),
-                'g': var_dob.get(),
-                'h': var_doj.get(),
-                'i': var_pass.get(),
-                'j': var_utype.get(),
-                'k': var_address.get(),
-                'l': var_salary.get(),
 
-            })
-        except:
-            c.execute('INSERT INTO addresses VALUES (:a,:b,:c,:d,:e,:f,:g,:h,:i,:j,:k,:l)', {
-                'a': var_emp_id.get(),
-                'b': var_name.get(),
-                'd': var_email.get(),
-                'e': var_gender.get(),
-                'f': var_contact.get(),
-                'g': var_dob.get(),
-                'h': var_doj.get(),
-                'i': var_pass.get(),
-                'j': var_utype.get(),
-                'k': var_address.get(),
-                'l': var_salary.get(),
+        c.execute('INSERT INTO addresses VALUES (:a,:b,:d,:e,:f,:g,:h,:i,:j,:k,:l)', {
+            'a': var_emp_id.get(),
+            'b': var_name.get(),
+            'd': var_email.get(),
+            'e': var_gender.get(),
+            'f': var_contact.get(),
+            'g': var_dob.get(),
+            'h': var_doj.get(),
+            'i': var_pass.get(),
+            'j': var_utype.get(),
+            'k': var_address.get(),
+            'l': var_salary.get(),
 
-            })
-
+        })
 
     # searchFrame
 
@@ -127,7 +121,9 @@ def main():
         font=('goudy old style', 15),
     )
     cmb_gender.place(x=500, y=150, width=180)
-    cmb_gender.current(0)
+    var_gender.set(cmb_gender.get())
+
+
 
     # row2
 
@@ -175,7 +171,7 @@ def main():
         font=('goudy old style', 15),
     )
     cmb_usertype.place(x=850, y=220, width=180)
-    cmb_usertype.current(0)
+    var_utype.set(cmb_usertype.get())
 
     # row4
 
@@ -285,3 +281,4 @@ def main():
     EmployeeTable.pack(fill=BOTH, expand=1)
 
     root.mainloop()
+
